@@ -23,7 +23,11 @@ Lalu Ketikan "php artisan migrate" pada CLI kamu
 
 ## Langkah Keempat
 
-Buat Akun 
+Lalu ketikan "php artisan serve" untuk menjalankan server local
+
+## Langkah Kelima
+
+Buat Akun
 
 ## About Laravel
 
