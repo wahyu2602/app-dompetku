@@ -7,6 +7,18 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Langkah Pertama
+
+Pastikan kamu sudah membuat DataBase dengan Nama "db_dompet"
+
+## Langkah Kedua
+
+Lalu Ketikan "php artisan migrate" pada CLI kamu
+
+## Langkah Ketiga
+
+Buat Akun 
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
