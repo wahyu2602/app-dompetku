@@ -9,13 +9,19 @@
 
 ## Langkah Pertama
 
-Pastikan kamu sudah membuat DataBase dengan Nama "db_dompet"
+Pastikan kamu sudah menginstall composer pada sistem komputer / laptop kamu,
+
+Ketikan "composer install" pada CLI
 
 ## Langkah Kedua
 
-Lalu Ketikan "php artisan migrate" pada CLI kamu
+Pastikan kamu sudah membuat DataBase dengan Nama "db_dompet"
 
 ## Langkah Ketiga
+
+Lalu Ketikan "php artisan migrate" pada CLI kamu
+
+## Langkah Keempat
 
 Buat Akun 
 
