@@ -63,7 +63,7 @@ class AuthController extends Controller
             ]);
         }
 
-        return back()->with('sukses', 'Akun Berhasil Dibuat, Silahkan Login');
+        return redirect('/')->with('sukses', 'Akun Berhasil Dibuat, Silahkan Login');
     }
 
     // AUTH -> LOGIN

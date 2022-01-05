@@ -9,6 +9,12 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   @endif
+  @if(session('sukses'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('sukses') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
 </div>
 <div class="card-body">
   <form action="/login" method="POST">
