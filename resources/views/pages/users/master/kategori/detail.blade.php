@@ -24,4 +24,5 @@
     </div>
   </div>
 </div>
+<a href="/user/kategori" class="btn btn-primary mt-5">Kembali</a>
 @endsection

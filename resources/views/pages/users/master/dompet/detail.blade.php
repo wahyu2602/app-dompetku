@@ -30,4 +30,5 @@
     </div>
   </div>
 </div>
+<a href="/user/dompet" class="btn btn-primary mt-5">Kembali</a>
 @endsection
