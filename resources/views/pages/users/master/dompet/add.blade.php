@@ -1,7 +1,7 @@
 @extends('templates.users.layout')
 
 @section('contentUsers')
-<div class="row align-items-center mt-4 justify-content-between">
+<div class="row align-items-center mt-4 mb-3 justify-content-between">
   <div class="col-3">
     <h3 class="text-secondary">DOMPET - <span class="fs-6 fw-light">Buat Baru</span></h3>
   </div>
