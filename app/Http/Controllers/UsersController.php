@@ -199,7 +199,9 @@ class UsersController extends Controller
     {
         $validate = $request->validate([
             'nilai' => 'required|numeric',
-            'deskripsi' => 'max:100'
+            'deskripsi' => 'max:100',
+            'kategori' => 'required',
+            'dompet' => 'required'
         ]);
 
         $dataDompetMasuk = DB::table('transaksi_masuk')->where('id_users', Auth::id())->get();
@@ -268,7 +270,9 @@ class UsersController extends Controller
     {
         $validate = $request->validate([
             'nilai' => 'required|numeric',
-            'deskripsi' => 'max:100'
+            'deskripsi' => 'max:100',
+            'kategori' => 'required',
+            'dompet' => 'required'
         ]);
 
         $dataDompetMasuk = DB::table('transaksi_keluar')->where('id_users', Auth::id())->get();

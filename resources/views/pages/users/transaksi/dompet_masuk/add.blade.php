@@ -29,19 +29,29 @@
       </div>
       <div class="col-lg-3">
         <label for="kategori" class="form-label">Kategori</label>
-        <select name="kategori" id="kategori" class="form-select" aria-label="Default select example">
+        <select name="kategori" id="kategori" class="form-select @error('kategori') is-invalid @enderror" aria-label="Default select example">
           @foreach($datakategori as $row)
           <option value="{{ $row->id }}">{{ $row->nama_kategori }}</option>
           @endforeach
         </select>
+        @error('kategori')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       <div class="col-lg-3">
         <label for="dompet" class="form-label">Dompet</label>
-        <select name="dompet" id="dompet" class="form-select" aria-label="Default select example">
+        <select name="dompet" id="dompet" class="form-select @error('dompet') is-invalid @enderror" aria-label="Default select example">
           @foreach($datadompet as $row)
           <option value="{{ $row->id }}">{{ $row->nama }}</option>
           @endforeach
         </select>
+        @error('dompet')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
     </div>
   </div>
