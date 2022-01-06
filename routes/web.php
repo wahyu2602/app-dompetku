@@ -40,6 +40,7 @@ Route::get('user/edit_dompet/{id}', [UsersController::class, 'GET_EDIT_DOMPET'])
 Route::post('user/edit_dompet/{id}', [UsersController::class, 'POST_EDIT_DOMPET'])->middleware('auth');
 Route::get('user/detail_dompet/{id}', [UsersController::class, 'DOMPET_DETAIL'])->middleware('auth');
 Route::get('user/status_dompet/{id}/{id_status}', [UsersController::class, 'CHECK_STATUS_DOMPET'])->middleware('auth');
+Route::get('user/filter_dompet/{id_status}', [UsersController::class, 'FILTER_DOMPET'])->middleware('auth');
 // ROUTE (USER) MASTER -> KATEGORI
 Route::get('user/kategori', [UsersController::class, 'Kategori'])->middleware('auth');
 Route::get('user/add_kategori', [UsersController::class, 'GET_ADD_KATEGORI'])->middleware('auth');
@@ -48,6 +49,7 @@ Route::get('user/edit_kategori/{id}', [UsersController::class, 'GET_EDIT_KATEGOR
 Route::post('user/edit_kategori/{id}', [UsersController::class, 'POST_EDIT_KATEGORI'])->middleware('auth');
 Route::get('user/detail_kategori/{id}', [UsersController::class, 'KATEGORI_DETAIL'])->middleware('auth');
 Route::get('user/status_kategori/{id}/{id_status}', [UsersController::class, 'CHECK_STATUS_KATEGORI'])->middleware('auth');
+Route::get('user/filter_kategori/{id_status}', [UsersController::class, 'FILTER_KATEGORI'])->middleware('auth');
 // ROUTE (USER) TRANSAKSI -> DOMPET_MASUK
 Route::get('user/transaksi_masuk', [UsersController::class, 'Dompet_Masuk'])->middleware('auth');
 Route::get('user/add_dompet_masuk', [UsersController::class, 'GET_ADD_DOMPET_MASUK'])->middleware('auth');

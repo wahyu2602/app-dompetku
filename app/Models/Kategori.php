@@ -31,4 +31,11 @@ class Kategori extends Model
         return $query->where('id_users', $idUser)
             ->where('id', $idKategori);
     }
+
+    public function scopeFilterStatusKategori($query, $idUser, $statusKategori)
+    {
+        return $query->join('kategori_status', 'kategori.status_id', '=', 'kategori_status.id_kategori')
+            ->where('id_users', $idUser)
+            ->where('status_id', $statusKategori)->get();
+    }
 }

@@ -23,7 +23,9 @@ class UsersController extends Controller
 
         return view('pages.users.master.dompet.index', [
             'datadompet' => $getDompet,
-            'nomor' => 1
+            'nomor' => 1,
+            'total' => $getDompet->count(),
+            'dompet_aktif' => 0
         ]);
     }
 
@@ -96,11 +98,23 @@ class UsersController extends Controller
 
     public function CHECK_STATUS_DOMPET(Request $request)
     {
-        Dompet::StatusDompet(Auth::id(), $request['id'])->update([
+        $getDompet = Dompet::StatusDompet(Auth::id(), $request['id'])->update([
             'status_id' => $request['id_status'],
         ]);
 
         return back()->with('suksesUpdate', 'Data Berhasil Di Update');
+    }
+
+    public function FILTER_DOMPET(Request $request)
+    {
+        $getDompet = Dompet::FilterStatusDompet(Auth::id(), $request['id_status']);
+
+        return view('pages.users.master.dompet.index', [
+            'datadompet' => $getDompet,
+            'nomor' => 1,
+            'total' => $getDompet->count(),
+            'dompet_aktif' => $getDompet[0]->status_id
+        ]);
     }
 
     // MASTER -> KATEGORI --------------------------------------------------------------------------------
@@ -110,7 +124,9 @@ class UsersController extends Controller
 
         return view('pages.users.master.kategori.index', [
             'datakategori' => $getKategori,
-            'nomor' => 1
+            'nomor' => 1,
+            'total' => $getKategori->count(),
+            'kategori_aktif' => 0
         ]);
     }
 
@@ -185,6 +201,18 @@ class UsersController extends Controller
         ]);
 
         return back()->with('suksesUpdate', 'Data Berhasil Di Update');
+    }
+
+    public function FILTER_KATEGORI(Request $request)
+    {
+        $getKategori = Kategori::FilterStatusKategori(Auth::id(), $request['id_status']);
+
+        return view('pages.users.master.kategori.index', [
+            'datakategori' => $getKategori,
+            'nomor' => 1,
+            'total' => $getKategori->count(),
+            'kategori_aktif' => $getKategori[0]->status_id
+        ]);
     }
 
     // TRANSAKSI -> DOMPET_MASUK --------------------------------------------------------------------------

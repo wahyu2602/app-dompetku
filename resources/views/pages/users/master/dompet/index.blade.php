@@ -10,11 +10,18 @@
       <a href="/user/add_dompet" class="btn btn-outline-primary">Buat baru</a>
       <div class="btn-group" role="group">
         <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          Filter
+          @if ($dompet_aktif === 0)
+          Semua ({{ $total }})
+          @elseif ($dompet_aktif === 1)
+          Aktif ({{ $total }})
+          @else
+          Tidak Aktif ({{ $total }})
+          @endif
         </button>
         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <li><a class="dropdown-item" href="#">Aktif</a></li>
-          <li><a class="dropdown-item" href="#">Tidak Aktif</a></li>
+          <li><a class="dropdown-item" href="/user/dompet">Semua</a></li>
+          <li><a class="dropdown-item" href="/user/filter_dompet/1">Aktif</a></li>
+          <li><a class="dropdown-item" href="/user/filter_dompet/2">Tidak Aktif</a></li>
         </ul>
       </div>
     </div>

@@ -31,4 +31,11 @@ class Dompet extends Model
         return $query->where('id_users', $idUser)
             ->where('id', $idDompet);
     }
+
+    public function scopeFilterStatusDompet($query, $idUser, $statusDompet)
+    {
+        return $query->join('dompet_status', 'dompet.status_id', '=', 'dompet_status.id_dompet')
+            ->where('id_users', $idUser)
+            ->where('status_id', $statusDompet)->get();
+    }
 }
