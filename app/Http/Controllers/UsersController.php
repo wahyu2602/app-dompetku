@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Dompet;
+use App\Models\Kategori;
 
 class UsersController extends Controller
 {
@@ -17,7 +19,7 @@ class UsersController extends Controller
     // MASTER -> DOMPET ---------------------------------------------------------------------------------
     public function Dompet()
     {
-        $getDompet = DB::table('dompet')->join('dompet_status', 'dompet.status_id', '=', 'dompet_status.id_dompet')->where('id_users', '=', Auth::id())->get();
+        $getDompet = Dompet::GetDompet(Auth::id());
 
         return view('pages.users.master.dompet.index', [
             'datadompet' => $getDompet,
@@ -28,6 +30,7 @@ class UsersController extends Controller
     public function GET_ADD_DOMPET()
     {
         $dompetStatus = DB::table('dompet_status')->get();
+
         return view('pages.users.master.dompet.add', [
             'dompetStatusAktif' => $dompetStatus[0],
             'dompetStatusNon' => $dompetStatus[1]
@@ -42,7 +45,7 @@ class UsersController extends Controller
             'status_dompet' => 'required'
         ]);
 
-        DB::table('dompet')->insert([
+        Dompet::insert([
             'id_users' => Auth::id(),
             'nama' => $validate['namadompet'],
             'referensi' => $request['referensi'],
@@ -55,8 +58,9 @@ class UsersController extends Controller
 
     public function GET_EDIT_DOMPET(Request $request)
     {
-        $dataDompet = DB::table('dompet')->where('id', $request['id'])->get();
+        $dataDompet = Dompet::GetDompetId($request['id'])->get();
         $dompetStatus = DB::table('dompet_status')->get();
+
         return view('pages.users.master.dompet.edit', [
             'datadompet' => $dataDompet[0],
             'dompetStatusAktif' => $dompetStatus[0],
@@ -71,7 +75,7 @@ class UsersController extends Controller
             'deskripsi' => 'max:100'
         ]);
 
-        DB::table('dompet')->where('id', $request['id'])->update([
+        Dompet::GetDompetId($request['id'])->update([
             'nama' => $request['namadompet'],
             'referensi' => $request['referensi'],
             'deskripsi' => $request['deskripsi'],
@@ -83,17 +87,27 @@ class UsersController extends Controller
 
     public function DOMPET_DETAIL(Request $request)
     {
-        $dompetDetail = DB::table('dompet')->join('dompet_status', 'dompet.status_id', '=', 'dompet_status.id_dompet')->where('id', $request['id'])->get();
+        $dompetDetail = Dompet::GetDompetDetail($request['id']);
 
         return view('pages.users.master.dompet.detail', [
             'detail' => $dompetDetail[0]
         ]);
     }
 
+    public function CHECK_STATUS_DOMPET(Request $request)
+    {
+        Dompet::StatusDompet(Auth::id(), $request['id'])->update([
+            'status_id' => $request['id_status'],
+        ]);
+
+        return back()->with('suksesUpdate', 'Data Berhasil Di Update');
+    }
+
     // MASTER -> KATEGORI --------------------------------------------------------------------------------
     public function kategori()
     {
-        $getKategori = DB::table('kategori')->join('kategori_status', 'kategori.status_id', '=', 'kategori_status.id_kategori')->where('id_users', '=', Auth::id())->get();
+        $getKategori = Kategori::GetKategori(Auth::id());
+
         return view('pages.users.master.kategori.index', [
             'datakategori' => $getKategori,
             'nomor' => 1
@@ -117,7 +131,7 @@ class UsersController extends Controller
             'status_kategori' => 'required'
         ]);
 
-        DB::table('kategori')->insert([
+        Kategori::insert([
             'id_users' => Auth::id(),
             'nama_kategori' => $validate['namakategori'],
             'deskripsi_kategori' => $validate['deskripsi'],
@@ -129,8 +143,9 @@ class UsersController extends Controller
 
     public function GET_EDIT_KATEGORI(Request $request)
     {
-        $dataKategori = DB::table('kategori')->where('id', $request['id'])->get();
+        $dataKategori = Kategori::GetKategoriId($request['id'])->get();
         $kategoriStatus = DB::table('kategori_status')->get();
+
         return view('pages.users.master.kategori.edit', [
             'datakategori' => $dataKategori[0],
             'kategoriStatusAktif' => $kategoriStatus[0],
@@ -145,7 +160,7 @@ class UsersController extends Controller
             'deskripsi' => 'max:100'
         ]);
 
-        DB::table('kategori')->where('id', '=', $request['id'])->update([
+        Kategori::GetKategoriId($request['id'])->update([
             'nama_kategori' => $request['namakategori'],
             'deskripsi_kategori' => $request['deskripsi'],
             'status_id' => $request['status_kategori']
@@ -156,11 +171,20 @@ class UsersController extends Controller
 
     public function KATEGORI_DETAIL(Request $request)
     {
-        $kategoriDetail = DB::table('kategori')->join('kategori_status', 'kategori.status_id', '=', 'kategori_status.id_kategori')->where('id', $request['id'])->get();
+        $kategoriDetail = Kategori::GetKategoriDetail($request['id']);
 
         return view('pages.users.master.kategori.detail', [
             'detail' => $kategoriDetail[0]
         ]);
+    }
+
+    public function CHECK_STATUS_KATEGORI(Request $request)
+    {
+        Kategori::StatusKategori(Auth::id(), $request['id'])->update([
+            'status_id' => $request['id_status'],
+        ]);
+
+        return back()->with('suksesUpdate', 'Data Berhasil Di Update');
     }
 
     // TRANSAKSI -> DOMPET_MASUK --------------------------------------------------------------------------

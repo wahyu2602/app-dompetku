@@ -26,6 +26,12 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+@if(session('suksesUpdate'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ session('suksesUpdate') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 <div class="card my-4">
   <div class="card-header">
     <i class="fas fa-table me-1"></i>
@@ -70,7 +76,11 @@
               <div class="offcanvas-body small">
                 <a class="btn btn-success mx-3" href="/user/detail_kategori/{{ $row->id }}"><i class="fas fa-search"></i> Detail</a>
                 <a class="btn btn-secondary mx-3" href="/user/edit_kategori/{{ $row->id }}"><i class="fas fa-pen"></i> Ubah</a>
-                <a class="btn btn-danger mx-3" href="#"><i class="fas fa-times"></i> Tidak Aktif</a>
+                @if($row->status_kategori === 'Aktif')
+                <a class="btn btn-danger mx-3" href="/user/status_kategori/{{ $row->id }}/2"><i class="fas fa-times"></i> Tidak Aktif</a>
+                @else
+                <a class="btn btn-primary mx-3" href="/user/status_kategori/{{ $row->id }}/1"><i class="fas fa-check"></i> Aktif</a>
+                @endif
               </div>
             </div>
         </tr>
