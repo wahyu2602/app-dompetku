@@ -77,6 +77,6 @@
     </div>
   </div>
   <button type="submit" class="btn btn-success">Buat Laporan</button>
-  <button class="btn btn-success">Buat ke Excel</button>
+  <button disabled class="btn btn-success">Buat ke Excel</button>
 </form>
 @endsection
