@@ -28,7 +28,7 @@
         <th scope="row">{{ $nomor++ }}</th>
         <td>{{ $row->tanggal }}</td>
         <td>{{ $row->kode }}</td>
-        <td>{{ $row->deskripsi }}</td>
+        <td>{{ $row->deskripsi_transaksi }}</td>
         <td>{{ $row->nama }}</td>
         <td>{{ $row->nama_kategori }}</td>
         <td>{{ number_format($row->nilai, 0, ',','.') }}</td>
@@ -39,7 +39,7 @@
         <th scope="row">{{ $nomor++ }}</th>
         <td>{{ $row->tanggal }}</td>
         <td>{{ $row->kode }}</td>
-        <td>{{ $row->deskripsi }}</td>
+        <td>{{ $row->deskripsi_transaksi }}</td>
         <td>{{ $row->nama }}</td>
         <td>{{ $row->nama_kategori }}</td>
         <td>{{ number_format($row->nilai, 0, ',','.') }}</td>
