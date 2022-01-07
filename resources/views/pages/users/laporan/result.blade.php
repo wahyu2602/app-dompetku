@@ -6,7 +6,7 @@
   <a href="/user/laporan" class="btn btn-secondary">Kembali</a>
 </div>
 <div class="my-3 text-center">
-  <h3 class="text-secondary">RIWAYAT TRANSKASI</h3>
+  <h3 class="text-secondary">RIWAYAT TRANSAKSI</h3>
   <p>{{ $tgl_awal }} - {{ $tgl_akhir }}</p>
 </div>
 <div class="table-responsive">
