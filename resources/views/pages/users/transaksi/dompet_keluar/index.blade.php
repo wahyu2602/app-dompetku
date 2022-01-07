@@ -56,7 +56,7 @@
           <td>
             {{ $row->nama_kategori }}
           </td>
-          <td>{{ $row->nilai }}</td>
+          <td>{{ number_format($row->nilai, 0, ',','.') }}</td>
           <td>{{ $row->nama }}</td>
         </tr>
         @endforeach

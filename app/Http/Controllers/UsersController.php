@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Dompet;
 use App\Models\Kategori;
-use Mockery\Undefined;
 
 class UsersController extends Controller
 {
@@ -398,5 +397,92 @@ class UsersController extends Controller
 
     public function RESULT(Request $request)
     {
+
+        $request->validate([
+            'tanggalawal' => 'required',
+            'tanggalakhir' => 'required',
+        ]);
+
+        if (!$request['kategori'] == 0) {
+            $dataMasuk = DB::table('transaksi_masuk')
+                ->join('dompet', 'transaksi_masuk.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_masuk.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_masuk.status_id', $request['transaksi_masuk'])
+                ->where('kategori_id', $request['kategori'])
+                ->get();
+
+            $dataKeluar = DB::table('transaksi_keluar')
+                ->join('dompet', 'transaksi_keluar.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_keluar.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_keluar.status_id', $request['transaksi_keluar'])
+                ->where('kategori_id', $request['kategori'])
+                ->get();
+        } else if (!$request['dompet'] == 0) {
+            $dataMasuk = DB::table('transaksi_masuk')
+                ->join('dompet', 'transaksi_masuk.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_masuk.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_masuk.status_id', $request['transaksi_masuk'])
+                ->where('dompet_id', $request['dompet'])
+                ->get();
+
+            $dataKeluar = DB::table('transaksi_keluar')
+                ->join('dompet', 'transaksi_keluar.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_keluar.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_keluar.status_id', $request['transaksi_keluar'])
+                ->where('dompet_id', $request['dompet'])
+                ->get();
+        } else if (!$request['kategori'] == 0 && $request['dompet'] == 0) {
+            $dataMasuk = DB::table('transaksi_masuk')
+                ->join('dompet', 'transaksi_masuk.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_masuk.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_masuk.status_id', $request['transaksi_masuk'])
+                ->where('dompet_id', $request['dompet'])
+                ->where('kategori_id', $request['kategori'])
+                ->get();
+
+            $dataKeluar = DB::table('transaksi_keluar')
+                ->join('dompet', 'transaksi_keluar.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_keluar.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_keluar.status_id', $request['transaksi_keluar'])
+                ->where('dompet_id', $request['dompet'])
+                ->where('kategori_id', $request['kategori'])
+                ->get();
+        } else {
+            $dataMasuk = DB::table('transaksi_masuk')
+                ->join('dompet', 'transaksi_masuk.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_masuk.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_masuk.status_id', $request['transaksi_masuk'])
+                ->get();
+
+            $dataKeluar = DB::table('transaksi_keluar')
+                ->join('dompet', 'transaksi_keluar.dompet_id', '=', 'dompet.id')
+                ->join('kategori', 'transaksi_keluar.kategori_id', '=', 'kategori.id')
+                ->where('tanggal', '>=', $request['tanggalawal'])
+                ->where('tanggal', '<=', $request['tanggalakhir'])
+                ->where('transaksi_keluar.status_id', $request['transaksi_keluar'])
+                ->get();
+        }
+
+        return view('pages.users.laporan.result', [
+            'result_masuk' => $dataMasuk,
+            'result_keluar' => $dataKeluar,
+            'tgl_awal' => $request['tanggalawal'],
+            'tgl_akhir' => $request['tanggalakhir'],
+            'nomor' => 1
+        ]);
     }
 }
