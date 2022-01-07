@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Dompet;
 use App\Models\Kategori;
+use Mockery\Undefined;
 
 class UsersController extends Controller
 {
@@ -21,10 +22,16 @@ class UsersController extends Controller
     {
         $getDompet = Dompet::GetDompet(Auth::id());
 
+        if ($getDompet->isEmpty()) {
+            $total = 0;
+        } else {
+            $total = $getDompet->count();
+        }
+
         return view('pages.users.master.dompet.index', [
             'datadompet' => $getDompet,
             'nomor' => 1,
-            'total' => $getDompet->count(),
+            'total' => $total,
             'dompet_aktif' => 0
         ]);
     }
@@ -109,11 +116,17 @@ class UsersController extends Controller
     {
         $getDompet = Dompet::FilterStatusDompet(Auth::id(), $request['id_status']);
 
+        if (empty($getDompet[0]->status_id)) {
+            $total = 0;
+        } else {
+            $total = $getDompet->count();
+        }
+
         return view('pages.users.master.dompet.index', [
             'datadompet' => $getDompet,
             'nomor' => 1,
-            'total' => $getDompet->count(),
-            'dompet_aktif' => $getDompet[0]->status_id
+            'total' => $total,
+            'dompet_aktif' => $request['id_status']
         ]);
     }
 
@@ -122,10 +135,16 @@ class UsersController extends Controller
     {
         $getKategori = Kategori::GetKategori(Auth::id());
 
+        if ($getKategori->isEmpty()) {
+            $total = 0;
+        } else {
+            $total = $getKategori->count();
+        }
+
         return view('pages.users.master.kategori.index', [
             'datakategori' => $getKategori,
             'nomor' => 1,
-            'total' => $getKategori->count(),
+            'total' => $total,
             'kategori_aktif' => 0
         ]);
     }
@@ -207,11 +226,17 @@ class UsersController extends Controller
     {
         $getKategori = Kategori::FilterStatusKategori(Auth::id(), $request['id_status']);
 
+        if (empty($getKategori[0]->status_id)) {
+            $total = 0;
+        } else {
+            $total = $getKategori->count();
+        }
+
         return view('pages.users.master.kategori.index', [
             'datakategori' => $getKategori,
             'nomor' => 1,
-            'total' => $getKategori->count(),
-            'kategori_aktif' => $getKategori[0]->status_id
+            'total' => $total,
+            'kategori_aktif' => $request['id_status']
         ]);
     }
 

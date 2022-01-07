@@ -10,9 +10,9 @@
       <a href="/user/add_dompet" class="btn btn-outline-primary">Buat baru</a>
       <div class="btn-group" role="group">
         <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          @if ($dompet_aktif === 0)
+          @if ($dompet_aktif == 0)
           Semua ({{ $total }})
-          @elseif ($dompet_aktif === 1)
+          @elseif ($dompet_aktif == 1)
           Aktif ({{ $total }})
           @else
           Tidak Aktif ({{ $total }})

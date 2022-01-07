@@ -10,9 +10,9 @@
       <a href="/user/add_kategori" class="btn btn-outline-primary">Buat baru</a>
       <div class="btn-group" role="group">
         <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          @if ($kategori_aktif === 0)
+          @if ($kategori_aktif == 0)
           Semua ({{ $total }})
-          @elseif ($kategori_aktif === 1)
+          @elseif ($kategori_aktif == 1)
           Aktif ({{ $total }})
           @else
           Tidak Aktif ({{ $total }})
